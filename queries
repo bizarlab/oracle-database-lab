@@ -1,0 +1,6 @@
+# Diferentes vistas para ver el estado de las instancias y bases de datos
+select instance_name, status from v$instance;
+select name,open_mode from v$database;
+select name from v$datafile;
+select * from v$controlfile;
+select member from v$logfile;

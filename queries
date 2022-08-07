@@ -1,6 +1,42 @@
 # Diferentes vistas para ver el estado de las instancias y bases de datos
+
 select instance_name, status from v$instance;
 select name,open_mode from v$database;
 select name from v$datafile;
 select * from v$controlfile;
 select member from v$logfile;
+
+# Determina si la instancia es parte de un RAC
+
+select parallel from v$instance;
+
+# Determina si esta protegida contra la perdida de datos mediante el data guard
+
+select protection_level from v$database;
+
+# Determina si el Streams está configurado
+
+select * from dba_streams_administrator;
+
+# Identificamos las estructuras físicas de la base de datos.
+
+select name,bytes from v$datafile;
+select name,bytes from v$tempfile;
+select member from v$logfile;
+select * from v$controlfile;
+
+# Podemos visualizar los diferentes segmenteos de memoria compartidos y los procesos de oracle con los siguientes comandos
+
+ipcs -m
+ps -ef | grep ora_
+
+# Muestra el estado actual, maximo y minimo de de los tamaños del SGA que se pueden redimensionar automaticamente
+
+select component, current_size,min_size,max_size
+from v$sga_dynamic_components;
+
+# Determina cuanta memoria se ha adjudicado al PGA
+
+select name,value from v$pgastat where name in
+('maximum PGA allocated','total PGA allocated')
+

@@ -40,3 +40,30 @@ from v$sga_dynamic_components;
 select name,value from v$pgastat where name in
 ('maximum PGA allocated','total PGA allocated')
 
+
+# Determina que procesos están corriendo
+
+select program,paddr from v$session order by program;
+select program,addr from v$process order by program;
+
+# Muestra todos los procesos
+select name,description,paddr from v$bgprocess order by paddr;
+
+select platform_name from v$database;
+
+select name from v$controlfile;
+
+select group#,bytes,members from v$log;
+select group#,member from v$logfile;
+
+select t.name tname,d.name fname,bytes
+from v$tablespace t join v$datafile d
+on t.ts#=d.ts#
+order by t.ts#;
+
+# Muestra los temporary tablespaces
+
+select t.name tname,d.name fname,bytes
+from v$tablespace t join v$tempfile d
+on t.ts#=d.ts# order by t.ts#;
+

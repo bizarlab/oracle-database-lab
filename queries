@@ -67,3 +67,15 @@ select t.name tname,d.name fname,bytes
 from v$tablespace t join v$tempfile d
 on t.ts#=d.ts# order by t.ts#;
 
+# Muestra los spfile y los pfile
+select name,value from v$parameter order by name;
+select name,value from v$spparameter order by name;
+
+# Parametros basicos
+select name,value from v$parameter where isbasic='TRUE' order by name;
+
+select s.name,s.value
+from v$spparameter s join v$parameter p on s.name=p.name
+where p.isbasic='TRUE' order by name
+
+
